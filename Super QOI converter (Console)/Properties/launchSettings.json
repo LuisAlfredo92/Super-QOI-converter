@@ -1,12 +1,8 @@
 {
   "profiles": {
-    "-c sin ruta": {
+    "No paths": {
       "commandName": "Project",
       "commandLineArgs": "-c"
-    },
-    "ayuda": {
-      "commandName": "Project",
-      "commandLineArgs": "--help"
     }
   }
 }
