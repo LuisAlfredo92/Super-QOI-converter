@@ -1,4 +1,8 @@
-﻿namespace Core
+﻿using QoiSharp;
+using QoiSharp.Codec;
+using StbImageSharp;
+
+namespace Core
 {
     public class Converter
     {
@@ -11,7 +15,17 @@
         {
             try
             {
-                //TODO: Convertion
+                byte[] qoiData;
+                string newPath = Path.GetDirectoryName(oldPath) + Path.GetFileNameWithoutExtension(oldPath)
+                    + ".qoi";
+                await using (var stream = File.OpenRead(oldpath))
+                {
+                    var image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
+                    var qoiImage = new QoiImage(image.Data, image.Width, image.Height, (Channels)image.Comp);
+                    qoiData = QoiEncoder.Encode(qoiImage);
+                }
+
+                await File.WriteAllBytesAsync(@"C:\Users\luisa\Desktop\Dibujo.qoi", qoiData);
 
                 if (copyData)
                 {
