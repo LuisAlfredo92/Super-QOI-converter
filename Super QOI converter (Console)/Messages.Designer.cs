@@ -213,9 +213,9 @@ namespace Super_QOI_converter__Console_ {
         /// <summary>
         ///   Busca una cadena traducida similar a It&apos;s not necessary to use this program with console commands, you can execute it by double-clicking on the executable file and you&apos;ll receive help to use it as an usual program. However, if you want to use it as console command, here&apos;s the necessary info:.
         /// </summary>
-        internal static string Not_console_neccesary {
+        internal static string Not_console_necessary {
             get {
-                return ResourceManager.GetString("Not console neccesary", resourceCulture);
+                return ResourceManager.GetString("Not console necessary", resourceCulture);
             }
         }
         

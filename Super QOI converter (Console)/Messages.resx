@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Not console neccesary" xml:space="preserve">
+  <data name="Not console necessary" xml:space="preserve">
     <value>It's not necessary to use this program with console commands, you can execute it by double-clicking on the executable file and you'll receive help to use it as an usual program. However, if you want to use it as console command, here's the necessary info:</value>
   </data>
   <data name="Program name" xml:space="preserve">

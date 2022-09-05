@@ -7,7 +7,6 @@
 
         static void Main(string[] args)
         {
-            //TODO: use a Resource manager to select the lang, currently only English
             _copyFileInfo = _deleteSources = _ignoreColors = null;
 
             Console.BackgroundColor = ConsoleColor.Black;
@@ -31,10 +30,10 @@
                             Console.WriteLine(Messages.Made_by);
                             ChangeConsoleColor(ConsoleColor.White);
                             Console.WriteLine($@"{Messages.Repo_official_link_message}: https://github.com/LuisAlfredo92/Super-QOI-converter"
-                                              + Environment.NewLine);
+                                            + Environment.NewLine);
 
                             ChangeConsoleColor(ConsoleColor.Cyan);
-                            Console.WriteLine(Messages.Not_console_neccesary + Environment.NewLine);
+                            Console.WriteLine(Messages.Not_console_necessary + Environment.NewLine);
 
                             ChangeConsoleColor(ConsoleColor.White);
                             Console.WriteLine(Messages.Commands_title + Environment.NewLine);
@@ -115,7 +114,9 @@
 
                     break;
             }
-            // TODO: Start process
+
+            // Here starts the convertion process
+            //TODO: Ask user for number of concurrent conversions
         }
 
         private static bool SelectOption(string message, ref bool? configuration)
