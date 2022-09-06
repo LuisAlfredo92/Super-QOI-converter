@@ -217,4 +217,15 @@
   <data name="Use arrows or numbers and Enter" xml:space="preserve">
     <value>Usa las flechas o los números para seleccionar una opción y pulsa Enter</value>
   </data>
+  <data name="Do not overwrite option" xml:space="preserve">
+    <value>-no
+	No sobrescribirá archivos y omitirá la confirmación</value>
+  </data>
+  <data name="Overwrite option" xml:space="preserve">
+    <value>-o
+	Sobrescribe los archivos si ya existen</value>
+  </data>
+  <data name="File already exists" xml:space="preserve">
+    <value>El archivo ya existe. ¿Sobrescribir?</value>
+  </data>
 </root>

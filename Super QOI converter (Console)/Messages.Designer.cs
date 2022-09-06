@@ -117,6 +117,16 @@ namespace Super_QOI_converter__Console_ {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a -no
+        ///	Won&apos;t overwrite files and skip confirmation.
+        /// </summary>
+        internal static string Do_not_overwrite_option {
+            get {
+                return ResourceManager.GetString("Do not overwrite option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &quot;Super QOI converter&quot; C:\Absolute\path\to\your\image.png
         ///&quot;Super QOI converter&quot; F:\Several\paths.jpg C:\At\the\same\time.bmp
         ///&quot;Super QOI converter&quot; C:\With\options.tif -c -d.
@@ -133,6 +143,15 @@ namespace Super_QOI_converter__Console_ {
         internal static string Exit {
             get {
                 return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a File already exists. Overwrite?.
+        /// </summary>
+        internal static string File_already_exists {
+            get {
+                return ResourceManager.GetString("File already exists", resourceCulture);
             }
         }
         
@@ -236,6 +255,16 @@ namespace Super_QOI_converter__Console_ {
         internal static string Not_delete_source_option {
             get {
                 return ResourceManager.GetString("Not delete source option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a -o
+        ///	Overwrite files if they already exist.
+        /// </summary>
+        internal static string Overwrite_option {
+            get {
+                return ResourceManager.GetString("Overwrite option", resourceCulture);
             }
         }
         

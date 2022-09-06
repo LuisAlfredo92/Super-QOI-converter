@@ -132,6 +132,7 @@
   </data>
   <data name="Commands title" xml:space="preserve">
     <value>Command: "Super QOI converter" [Paths to files or folders] [Options]</value>
+    
   </data>
   <data name="You must add paths" xml:space="preserve">
     <value>You must add path files to use these options!</value>
@@ -219,5 +220,16 @@
   </data>
   <data name="Use arrows or numbers and Enter" xml:space="preserve">
     <value>Use arrows or numbers to select option and press Enter</value>
+  </data>
+  <data name="Overwrite option" xml:space="preserve">
+    <value>-o
+	Overwrite files if they already exist</value>
+  </data>
+  <data name="Do not overwrite option" xml:space="preserve">
+    <value>-no
+	Won't overwrite files and skip confirmation</value>
+  </data>
+  <data name="File already exists" xml:space="preserve">
+    <value>File already exists. Overwrite?</value>
   </data>
 </root>

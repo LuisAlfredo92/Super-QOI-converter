@@ -4,7 +4,7 @@ using StbImageSharp;
 
 namespace Core
 {
-    public class Converter
+    public class Converter : IOverwritingConfirmation
     {
         public static void StartNewConversion(string path)
         {
@@ -13,38 +13,38 @@ namespace Core
 
         public static async void ConvertToQoi(string oldPath, bool copyData, bool deleteSource)
         {
-            try
+            byte[] qoiData;
+            var newPath = string.Concat(Path.GetDirectoryName(oldPath),
+                Path.DirectorySeparatorChar, Path.GetFileNameWithoutExtension(oldPath), ".qoi");
+
+            await using (var stream = File.OpenRead(oldPath))
             {
-                byte[] qoiData;
-                string newPath = Path.GetDirectoryName(oldPath) + Path.GetFileNameWithoutExtension(oldPath)
-                    + ".qoi";
-                await using (var stream = File.OpenRead(oldpath))
+                var image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
+                var qoiImage = new QoiImage(image.Data, image.Width, image.Height, (Channels)image.Comp);
+                qoiData = QoiEncoder.Encode(qoiImage);
+            }
+
+            if (File.Exists(newPath) && !IOverwritingConfirmation.ConfirmateOverwrite(newPath)) return;
+
+            await File.WriteAllBytesAsync(newPath, qoiData);
+            if (copyData)
+            {
+                FileInfo oldInfo = new(oldPath);
+                _ = new FileInfo(newPath)
                 {
-                    var image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
-                    var qoiImage = new QoiImage(image.Data, image.Width, image.Height, (Channels)image.Comp);
-                    qoiData = QoiEncoder.Encode(qoiImage);
-                }
+                    Attributes = oldInfo.Attributes,
+                    CreationTime = oldInfo.CreationTime,
+                    LastAccessTime = oldInfo.LastAccessTime,
+                    LastWriteTime = oldInfo.LastWriteTime
+                };
+            }
 
-                await File.WriteAllBytesAsync(@"C:\Users\luisa\Desktop\Dibujo.qoi", qoiData);
+            if (deleteSource)
+                File.Delete(oldPath);
 
-                if (copyData)
-                {
-                    //TODO: Using FileInfo class, copy attributes and dates from oldPath
-                }
-
-                if (deleteSource)
-                {
-                    //TODO: With File class, delete the oldPath
-                }
-
-                /* TODO: Use this method to start a new thread for a conversion
+            /* TODO: Use this method to start a new thread for a conversion
                 * StartNewConversion();
                 */
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
     }
 }

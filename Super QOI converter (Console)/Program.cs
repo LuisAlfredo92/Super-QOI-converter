@@ -1,13 +1,15 @@
-﻿namespace Super_QOI_converter__Console_
+﻿using Core;
+
+namespace Super_QOI_converter__Console_
 {
-    internal class Program
+    internal class Program : IOverwritingConfirmation
     {
-        private static bool? _copyFileInfo, _deleteSources, _ignoreColors;
+        private static bool? _copyFileInfo, _deleteSources, _ignoreColors, _overwrite;
         private static List<string> _paths = new();
 
         static void Main(string[] args)
         {
-            _copyFileInfo = _deleteSources = _ignoreColors = null;
+            _copyFileInfo = _deleteSources = _ignoreColors = _overwrite = null;
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
@@ -42,7 +44,9 @@
                             Console.WriteLine(Messages.Delete_source_option + Environment.NewLine);
                             Console.WriteLine(Messages.Not_delete_source_option + Environment.NewLine);
                             Console.WriteLine(Messages.Help_option + Environment.NewLine);
-                            Console.WriteLine(Messages.Ignore_colors_option + Environment.NewLine + Environment.NewLine);
+                            Console.WriteLine(Messages.Ignore_colors_option + Environment.NewLine);
+                            Console.WriteLine(Messages.Overwrite_option + Environment.NewLine);
+                            Console.WriteLine(Messages.Do_not_overwrite_option + Environment.NewLine + Environment.NewLine);
 
                             Console.WriteLine(Messages.Here_are_some_examples + Environment.NewLine);
                             Console.WriteLine(Messages.Examples);
@@ -89,7 +93,9 @@
 
                 default: // Will start the program with the paths received
                     // If the user writes contradictory options, the program will close
-                    if ((args.Contains("-c") && args.Contains("-nc")) || (args.Contains("-d") && args.Contains("-nd")))
+                    if ((args.Contains("-c") && args.Contains("-nc")) ||
+                        (args.Contains("-d") && args.Contains("-nd")) ||
+                        (args.Contains("-o") && args.Contains("-no")))
                     {
                         ChangeConsoleColor(ConsoleColor.Red);
                         Console.WriteLine(Messages.Contradictory_options_error + Environment.NewLine);
@@ -108,18 +114,23 @@
                     else if (args.Contains("-nd"))
                         _deleteSources = false;
 
+                    if(args.Contains("-o"))
+                        _overwrite = true;
+                    else if (args.Contains("-no"))
+                        _overwrite = false;
+
                     // If the user writes only options without paths, the program will ask for paths
-                    if (args.All(element => new List<string> { "-c", "-nc", "-d", "-nd" }.Contains(element)))
+                    if (args.All(element => new List<string> { "-c", "-nc", "-d", "-nd", "-o", "-no" }.Contains(element)))
                         ReceivePaths();
 
                     break;
             }
 
-            // Here starts the convertion process
+            // Here starts the conversion process
             //TODO: Ask user for number of concurrent conversions
         }
 
-        private static bool SelectOption(string message, ref bool? configuration)
+        public static bool SelectOption(string message, ref bool? configuration)
         {
             var keyPressed = ConsoleKey.Enter;
             byte selectedOption = 1;
@@ -232,6 +243,17 @@
                     tempPath = string.Empty;
                 }
             } while (!string.Equals(tempPath, Messages.Exit, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private bool ConfirmateOverwrite(string existingFile)
+        {
+            var msg = string.Concat(existingFile, "\n", Messages.File_already_exists);
+            return SelectOption(msg, ref _overwrite);
+        }
+
+        private static void ReceiveOptions()
+        {
+
         }
     }
 }
