@@ -4,21 +4,30 @@ using StbImageSharp;
 
 namespace Core
 {
+    /// <summary>
+    /// The converter class to convert images to QOI format
+    /// </summary>
     public class Converter
     {
-        public static void StartNewConversion(string path)
-        {
-            //TODO: Receive string and start ConvertToQoi()
-        }
-
+        /// <summary>
+        /// Converts an image from png, jpg or bmp to qoi format.
+        /// </summary>
+        /// <param name="father">The class that will use this function.
+        /// It must implement IOptionsConfirmation interface to work properly</param>
+        /// <param name="oldPath">path of the original file, the one that will be converted
+        /// into qoi format.</param>
         public static void ConvertToQoi(IOptionsConfirmation father, string oldPath)
         {
+            /* Checks if the path is a directory, if so, will skip it and call the
+             * ManageDirectory function since it won't be possible to convert
+             */
             if (File.GetAttributes(oldPath).HasFlag(FileAttributes.Directory))
             {
                 father.ManageDirectory(oldPath);
                 return;
             }
 
+            // Starts conversion and creates the new path
             byte[] qoiData;
             var newPath = string.Concat(Path.GetDirectoryName(oldPath),
                 Path.DirectorySeparatorChar, Path.GetFileNameWithoutExtension(oldPath), ".qoi");
@@ -30,9 +39,14 @@ namespace Core
                 qoiData = QoiEncoder.Encode(qoiImage);
             }
 
+            /* If the file exists, the ConfirmOverwrite will be called to handle it, and
+             * if the user doesn't want to overwrite, the file will be skipped
+             */
             if (File.Exists(newPath) && !father.ConfirmOverwrite(newPath)) return;
 
             File.WriteAllBytesAsync(newPath, qoiData);
+
+            // Copies info from original file if the user accepts
             if (father.ConfirmCopy(oldPath))
             {
                 FileInfo oldInfo = new(oldPath);
@@ -45,12 +59,9 @@ namespace Core
                 };
             }
 
+            // Deletes original file if the user accepts
             if (father.ConfirmDeletion(oldPath))
                 File.Delete(oldPath);
-
-            /* TODO: Use this method to start a new thread for a conversion
-                * StartNewConversion();
-                */
         }
     }
 }
