@@ -2,14 +2,14 @@
 
 namespace Super_QOI_converter__Console_
 {
-    internal class Program : IOverwritingConfirmation
+    internal class Program : IOptionsConfirmation
     {
-        private static bool? _copyFileInfo, _deleteSources, _ignoreColors, _overwrite;
-        private static List<string> _paths = new();
+        private static bool? _copyFileInfo, _deleteSources, _ignoreColors, _overwrite, _readDirectories;
+        private static readonly List<string> Paths = new();
 
         static void Main(string[] args)
         {
-            _copyFileInfo = _deleteSources = _ignoreColors = _overwrite = null;
+            _copyFileInfo = _deleteSources = _ignoreColors = _overwrite = _readDirectories = null;
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
@@ -122,12 +122,23 @@ namespace Super_QOI_converter__Console_
                     // If the user writes only options without paths, the program will ask for paths
                     if (args.All(element => new List<string> { "-c", "-nc", "-d", "-nd", "-o", "-no" }.Contains(element)))
                         ReceivePaths();
+                    else
+                        Paths.AddRange(args.Where(element => !new List<string> { "-c", "-nc", "-d", "-nd", "-o", "-no" }.Contains(element)));
 
                     break;
             }
 
-            // Here starts the conversion process
             //TODO: Ask user for number of concurrent conversions
+
+            while (Paths.Count != 0)
+            {
+                Converter.ConvertToQoi(new Program(), Paths.First());
+                Paths.Remove(Paths.First());
+            }
+
+            ChangeConsoleColor(ConsoleColor.White);
+            Console.Clear();
+            Console.WriteLine(Messages.Thank_you);
         }
 
         public static bool SelectOption(string message, ref bool? configuration)
@@ -205,7 +216,7 @@ namespace Super_QOI_converter__Console_
             string tempPath;
 
             ChangeConsoleColor(ConsoleColor.Red);
-            Console.WriteLine(Messages.You_didn_t_add_any_path);
+            Console.WriteLine(Messages.You_did_not_add_any_path);
             ChangeConsoleColor(ConsoleColor.White);
             Console.WriteLine(Messages.Write_your_paths_now);
 
@@ -222,7 +233,17 @@ namespace Super_QOI_converter__Console_
                     Console.WriteLine(Messages.Reading_invalid_path_message);
                     ChangeConsoleColor(ConsoleColor.White);
                 }
-                else if (_paths.Contains(tempPath))
+                else if (!isExitString && !File.GetAttributes(tempPath).HasFlag(FileAttributes.Directory)
+                         && !(tempPath.EndsWith(".png", StringComparison.OrdinalIgnoreCase)
+                            || tempPath.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
+                            || tempPath.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
+                            || tempPath.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase)))
+                {
+                    ChangeConsoleColor(ConsoleColor.Red);
+                    Console.WriteLine(Messages.Not_image_or_folder);
+                    ChangeConsoleColor(ConsoleColor.White);
+                }
+                else if (Paths.Contains(tempPath))
                 {
                     ChangeConsoleColor(ConsoleColor.Red);
                     Console.WriteLine(Messages.Already_entered);
@@ -233,27 +254,60 @@ namespace Super_QOI_converter__Console_
                     // If is different to Exit string it will add it to paths
                     if (!string.Equals(tempPath, Messages.Exit, StringComparison.OrdinalIgnoreCase))
                     {
-                        _paths.Add(tempPath);
+                        Paths.Add(tempPath);
                         continue;
                     }
 
                     // If the user types Exit string but didn't add any path
-                    if (_paths.Any()) continue;
+                    if (Paths.Any()) continue;
                     Console.WriteLine(Messages.Add_at_least_one_path);
                     tempPath = string.Empty;
                 }
             } while (!string.Equals(tempPath, Messages.Exit, StringComparison.OrdinalIgnoreCase));
         }
 
-        private bool ConfirmateOverwrite(string existingFile)
+        public bool ConfirmCopy(string originalFile = "")
         {
+            if (_copyFileInfo.HasValue) return _copyFileInfo.Value;
+
+            var msg = string.Concat(originalFile, "\n", Messages.Do_you_want_to_copy_file_info);
+            return SelectOption(msg, ref _copyFileInfo);
+        }
+
+        public bool ConfirmDeletion(string originalFile = "")
+        {
+            if (_deleteSources.HasValue) return _deleteSources.Value;
+
+            ChangeConsoleColor(ConsoleColor.Red);
+            Console.WriteLine(Messages.This_is_going_to_delete_permanently);
+            ChangeConsoleColor(ConsoleColor.White);
+            var msg = string.Concat(originalFile, "\n", Messages.Do_you_want_to_delete_original_file);
+            return SelectOption(msg, ref _deleteSources);
+        }
+
+        public bool ConfirmOverwrite(string existingFile)
+        {
+            if (_overwrite.HasValue) return _overwrite.Value;
+
             var msg = string.Concat(existingFile, "\n", Messages.File_already_exists);
             return SelectOption(msg, ref _overwrite);
         }
 
-        private static void ReceiveOptions()
+        public void ManageDirectory(string directoryPath)
         {
-
+            var msg = string.Format(Messages.It_looks_like_a_directory, directoryPath);
+            if ((_readDirectories.HasValue && _readDirectories.Value)
+                || SelectOption(msg, ref _readDirectories))
+            {
+                //TODO: Add option to do it recursive?
+                Paths.AddRange(
+                    Directory.GetFiles(directoryPath).Where(element =>
+                        element.EndsWith(".png", StringComparison.OrdinalIgnoreCase)
+                        || element.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
+                        || element.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
+                        || element.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase))
+                    );
+            }
         }
     }
 }

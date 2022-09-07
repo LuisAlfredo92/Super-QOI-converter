@@ -127,6 +127,24 @@ namespace Super_QOI_converter__Console_ {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to copy attributes and dates (creation and modification date) from the original file?.
+        /// </summary>
+        internal static string Do_you_want_to_copy_file_info {
+            get {
+                return ResourceManager.GetString("Do you want to copy file info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to delete the original file?.
+        /// </summary>
+        internal static string Do_you_want_to_delete_original_file {
+            get {
+                return ResourceManager.GetString("Do you want to delete original file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &quot;Super QOI converter&quot; C:\Absolute\path\to\your\image.png
         ///&quot;Super QOI converter&quot; F:\Several\paths.jpg C:\At\the\same\time.bmp
         ///&quot;Super QOI converter&quot; C:\With\options.tif -c -d.
@@ -190,6 +208,15 @@ namespace Super_QOI_converter__Console_ {
         internal static string Invalid_option_or_path {
             get {
                 return ResourceManager.GetString("Invalid option or path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a It looks like {0} is a directory. Do you want to read each image from it?.
+        /// </summary>
+        internal static string It_looks_like_a_directory {
+            get {
+                return ResourceManager.GetString("It looks like a directory", resourceCulture);
             }
         }
         
@@ -259,6 +286,15 @@ namespace Super_QOI_converter__Console_ {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a This isn&apos;t a folder, image or it&apos;s not supported, skipping....
+        /// </summary>
+        internal static string Not_image_or_folder {
+            get {
+                return ResourceManager.GetString("Not image or folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a -o
         ///	Overwrite files if they already exist.
         /// </summary>
@@ -301,6 +337,24 @@ namespace Super_QOI_converter__Console_ {
         internal static string Specify_console_version {
             get {
                 return ResourceManager.GetString("Specify console version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Thank you for use Super QOI converter!.
+        /// </summary>
+        internal static string Thank_you {
+            get {
+                return ResourceManager.GetString("Thank you", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a WARNING: This is going to delete the file PERMANENTLY. Won&apos;t move it to trash bin.
+        /// </summary>
+        internal static string This_is_going_to_delete_permanently {
+            get {
+                return ResourceManager.GetString("This is going to delete permanently", resourceCulture);
             }
         }
         
@@ -361,9 +415,9 @@ namespace Super_QOI_converter__Console_ {
         /// <summary>
         ///   Busca una cadena traducida similar a It looks like you didn&apos;t write any path, so the program will read them now.
         /// </summary>
-        internal static string You_didn_t_add_any_path {
+        internal static string You_did_not_add_any_path {
             get {
-                return ResourceManager.GetString("You didn\'t add any path", resourceCulture);
+                return ResourceManager.GetString("You did not add any path", resourceCulture);
             }
         }
         

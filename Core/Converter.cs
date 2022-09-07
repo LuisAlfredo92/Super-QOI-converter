@@ -4,30 +4,36 @@ using StbImageSharp;
 
 namespace Core
 {
-    public class Converter : IOverwritingConfirmation
+    public class Converter
     {
         public static void StartNewConversion(string path)
         {
             //TODO: Receive string and start ConvertToQoi()
         }
 
-        public static async void ConvertToQoi(string oldPath, bool copyData, bool deleteSource)
+        public static void ConvertToQoi(IOptionsConfirmation father, string oldPath)
         {
+            if (File.GetAttributes(oldPath).HasFlag(FileAttributes.Directory))
+            {
+                father.ManageDirectory(oldPath);
+                return;
+            }
+
             byte[] qoiData;
             var newPath = string.Concat(Path.GetDirectoryName(oldPath),
                 Path.DirectorySeparatorChar, Path.GetFileNameWithoutExtension(oldPath), ".qoi");
 
-            await using (var stream = File.OpenRead(oldPath))
+            using (var stream = File.OpenRead(oldPath))
             {
                 var image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
                 var qoiImage = new QoiImage(image.Data, image.Width, image.Height, (Channels)image.Comp);
                 qoiData = QoiEncoder.Encode(qoiImage);
             }
 
-            if (File.Exists(newPath) && !IOverwritingConfirmation.ConfirmateOverwrite(newPath)) return;
+            if (File.Exists(newPath) && !father.ConfirmOverwrite(newPath)) return;
 
-            await File.WriteAllBytesAsync(newPath, qoiData);
-            if (copyData)
+            File.WriteAllBytesAsync(newPath, qoiData);
+            if (father.ConfirmCopy(oldPath))
             {
                 FileInfo oldInfo = new(oldPath);
                 _ = new FileInfo(newPath)
@@ -39,7 +45,7 @@ namespace Core
                 };
             }
 
-            if (deleteSource)
+            if (father.ConfirmDeletion(oldPath))
                 File.Delete(oldPath);
 
             /* TODO: Use this method to start a new thread for a conversion

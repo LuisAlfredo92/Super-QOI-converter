@@ -195,7 +195,7 @@
   <data name="Reading invalid path message" xml:space="preserve">
     <value>No es una ruta válida, omitiendo...</value>
   </data>
-  <data name="You didn't add any path" xml:space="preserve">
+  <data name="You did not add any path" xml:space="preserve">
     <value>Parece que no escribiste ninguna ruta, así que el programa las leerá ahora</value>
   </data>
   <data name="Write your paths now" xml:space="preserve">
@@ -227,5 +227,23 @@
   </data>
   <data name="File already exists" xml:space="preserve">
     <value>El archivo ya existe. ¿Sobrescribir?</value>
+  </data>
+  <data name="Do you want to copy file info" xml:space="preserve">
+    <value>¿Quieres copiar los atributos y fechas (fecha de creación y modificación) del archivo original?</value>
+  </data>
+  <data name="This is going to delete permanently" xml:space="preserve">
+    <value>ADVERTENCIA: Esto eliminará el archivo PERMANENTEMENTE. No lo moverá a la papelera de reciclaje</value>
+  </data>
+  <data name="Do you want to delete original file" xml:space="preserve">
+    <value>¿Quieres eliminar el archivo original?</value>
+  </data>
+  <data name="Thank you" xml:space="preserve">
+    <value>¡Gracias por usar Super QOI converter!</value>
+  </data>
+  <data name="It looks like a directory" xml:space="preserve">
+    <value>Parece que {0} es una carpeta. ¿Quieres leer cada imagen de ella?</value>
+  </data>
+  <data name="Not image or folder" xml:space="preserve">
+    <value>Esto no es una carpeta, imagen o no está soportada, omitiendo...</value>
   </data>
 </root>

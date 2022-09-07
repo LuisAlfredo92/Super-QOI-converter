@@ -199,7 +199,7 @@
   <data name="Reading invalid path message" xml:space="preserve">
     <value>It isn't a valid path, skipping...</value>
   </data>
-  <data name="You didn't add any path" xml:space="preserve">
+  <data name="You did not add any path" xml:space="preserve">
     <value>It looks like you didn't write any path, so the program will read them now</value>
   </data>
   <data name="Write your paths now" xml:space="preserve">
@@ -231,5 +231,23 @@
   </data>
   <data name="File already exists" xml:space="preserve">
     <value>File already exists. Overwrite?</value>
+  </data>
+  <data name="Do you want to copy file info" xml:space="preserve">
+    <value>Do you want to copy attributes and dates (creation and modification date) from the original file?</value>
+  </data>
+  <data name="This is going to delete permanently" xml:space="preserve">
+    <value>WARNING: This is going to delete the file PERMANENTLY. Won't move it to trash bin</value>
+  </data>
+  <data name="Do you want to delete original file" xml:space="preserve">
+    <value>Do you want to delete the original file?</value>
+  </data>
+  <data name="Thank you" xml:space="preserve">
+    <value>Thank you for use Super QOI converter!</value>
+  </data>
+  <data name="It looks like a directory" xml:space="preserve">
+    <value>It looks like {0} is a directory. Do you want to read each image from it?</value>
+  </data>
+  <data name="Not image or folder" xml:space="preserve">
+    <value>This isn't a folder, image or it's not supported, skipping...</value>
   </data>
 </root>
