@@ -128,7 +128,7 @@
   </data>
   <data name="Commands title" xml:space="preserve">
     <value>Comando: "Super QOI converter" [Rutas a archivos o carpetas] [Opciones]</value>
-    <comment>@Invariant</comment>
+    
   </data>
   <data name="Copy attributes and dates option" xml:space="preserve">
     <value>-c

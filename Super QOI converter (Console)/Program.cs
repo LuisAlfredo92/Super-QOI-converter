@@ -2,12 +2,20 @@
 
 namespace Super_QOI_converter__Console_
 {
+    /// <summary>
+    /// Main class of the console version. It contains the Main function
+    /// </summary>
     internal class Program : IOptionsConfirmation
     {
         private static bool? _copyFileInfo, _deleteSources, _ignoreColors, _overwrite, _readDirectories;
         private static readonly List<string> Paths = new();
 
-        static void Main(string[] args)
+        /// <summary>
+        /// Main function
+        /// </summary>
+        /// <param name="args">Arguments that the program could use, they can be
+        /// files paths, directories, options or nothing</param>
+        private static void Main(string[] args)
         {
             _copyFileInfo = _deleteSources = _ignoreColors = _overwrite = _readDirectories = null;
 
@@ -141,6 +149,14 @@ namespace Super_QOI_converter__Console_
             Console.WriteLine(Messages.Thank_you);
         }
 
+        /// <summary>
+        /// Function to select the Yes, Yes to all, No, No to all options
+        /// </summary>
+        /// <param name="message">The message that will be showed on the console.
+        /// It's recommended it is a question</param>
+        /// <param name="configuration">The reference to the variable that will be
+        /// overwritten if the user selects a "to all" option</param>
+        /// <returns>A bool that indicates the selected option</returns>
         public static bool SelectOption(string message, ref bool? configuration)
         {
             var keyPressed = ConsoleKey.Enter;
@@ -205,12 +221,20 @@ namespace Super_QOI_converter__Console_
             return selectedOption is 1 or 2;
         }
 
+        /// <summary>
+        /// Changes the console color depending on the -i option.
+        /// </summary>
+        /// <param name="color">The color that the text will have</param>
         private static void ChangeConsoleColor(ConsoleColor color)
         {
             if (_ignoreColors != true)
                 Console.ForegroundColor = color;
         }
 
+        /// <summary>
+        /// Receives the paths of the files or directories
+        /// if the user didn't write it on arguments when executing
+        /// </summary>
         private static void ReceivePaths()
         {
             string tempPath;
@@ -266,6 +290,15 @@ namespace Super_QOI_converter__Console_
             } while (!string.Equals(tempPath, Messages.Exit, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>
+        /// Function from IConfirmOptions that will confirm or ask if the user wants to
+        /// copy attributes and dates from the original files
+        /// </summary>
+        /// <param name="originalFile">Path to the original file.
+        /// It can be null since it isn't necessary. In this case it's only to
+        /// specify the file we're talking about</param>
+        /// <returns>If the respective variable has a value, that value is returned.
+        /// If the variable is null, it'll ask to the user what they want to do</returns>
         public bool ConfirmCopy(string originalFile = "")
         {
             if (_copyFileInfo.HasValue) return _copyFileInfo.Value;
@@ -274,6 +307,15 @@ namespace Super_QOI_converter__Console_
             return SelectOption(msg, ref _copyFileInfo);
         }
 
+        /// <summary>
+        /// Function from IConfirmOptions that will confirm or ask if the user wants to
+        /// delete the original files
+        /// </summary>
+        /// <param name="originalFile">Path to the original file.
+        /// It can be null since it isn't necessary. In this case it's only to
+        /// specify the file we're talking about</param>
+        /// <returns>If the respective variable has a value, that value is returned.
+        /// If the variable is null, it'll ask to the user what they want to do</returns>
         public bool ConfirmDeletion(string originalFile = "")
         {
             if (_deleteSources.HasValue) return _deleteSources.Value;
@@ -285,6 +327,15 @@ namespace Super_QOI_converter__Console_
             return SelectOption(msg, ref _deleteSources);
         }
 
+        /// <summary>
+        /// Function from IConfirmOptions that will confirm or ask if the user wants to
+        /// overwrite existing files
+        /// </summary>
+        /// <param name="existingFile">Path to the existing file.
+        /// It can's be null because we must show the already existing file so the user
+        /// can modify it externally</param>
+        /// <returns>If the respective variable has a value, that value is returned.
+        /// If the variable is null, it'll ask to the user what they want to do</returns>
         public bool ConfirmOverwrite(string existingFile)
         {
             if (_overwrite.HasValue) return _overwrite.Value;
@@ -293,6 +344,10 @@ namespace Super_QOI_converter__Console_
             return SelectOption(msg, ref _overwrite);
         }
 
+        /// <summary>
+        /// Function from IConfirmOptions to handle if the program recognizes a directory path.
+        /// </summary>
+        /// <param name="directoryPath">The directory path.</param>
         public void ManageDirectory(string directoryPath)
         {
             var msg = string.Format(Messages.It_looks_like_a_directory, directoryPath);
