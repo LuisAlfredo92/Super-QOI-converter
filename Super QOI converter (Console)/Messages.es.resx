@@ -212,7 +212,7 @@
     <value>Enlace oficial del repositorio</value>
   </data>
   <data name="Made by" xml:space="preserve">
-    <value>Hecho por: LuisAlfredo92</value>
+    <value>hecho por</value>
   </data>
   <data name="Use arrows or numbers and Enter" xml:space="preserve">
     <value>Usa las flechas o los números para seleccionar una opción y pulsa Enter</value>
@@ -245,5 +245,15 @@
   </data>
   <data name="Not image or folder" xml:space="preserve">
     <value>Esto no es una carpeta, imagen o no está soportada, omitiendo...</value>
+  </data>
+  <data name="Under a MIT license" xml:space="preserve">
+    <value>con una licencia del MIT</value>
+  </data>
+  <data name="Version option" xml:space="preserve">
+    <value>-v, --version
+	Muestra la versión del programa</value>
+  </data>
+  <data name="With help of" xml:space="preserve">
+    <value>Con ayuda de:</value>
   </data>
 </root>

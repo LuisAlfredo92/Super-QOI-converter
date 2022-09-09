@@ -35,12 +35,17 @@ namespace Super_QOI_converter__Console_
                             ChangeConsoleColor(ConsoleColor.Cyan);
                             Console.Write($@" {Messages.Program_name}");
                             ChangeConsoleColor(ConsoleColor.White);
-                            Console.WriteLine($@" {Messages.Specify_console_version}");
+                            Console.Write($@" {Messages.Specify_console_version} ");
                             ChangeConsoleColor(ConsoleColor.Cyan);
-                            Console.WriteLine(Messages.Made_by);
+                            Console.WriteLine(Messages.Made_by + @": LuisAlfredo92 (https://github.com/LuisAlfredo92)");
                             ChangeConsoleColor(ConsoleColor.White);
                             Console.WriteLine($@"{Messages.Repo_official_link_message}: https://github.com/LuisAlfredo92/Super-QOI-converter"
                                             + Environment.NewLine);
+                            Console.WriteLine(Messages.With_help_of);
+                            Console.WriteLine(@"- QoiSharp (https://github.com/NUlliiON/QoiSharp) " + Messages.Made_by
+                                + @": NUlliiON (https://github.com/NUlliiON) " + Messages.Under_a_MIT_license);
+                            Console.WriteLine(@"- StbImageSharp (https://github.com/StbSharp/StbImageSharp) " + Messages.Made_by
+                                + @": StbSharp (https://github.com/StbSharp)" + Environment.NewLine);
 
                             ChangeConsoleColor(ConsoleColor.Cyan);
                             Console.WriteLine(Messages.Not_console_necessary + Environment.NewLine);
@@ -54,11 +59,20 @@ namespace Super_QOI_converter__Console_
                             Console.WriteLine(Messages.Help_option + Environment.NewLine);
                             Console.WriteLine(Messages.Ignore_colors_option + Environment.NewLine);
                             Console.WriteLine(Messages.Overwrite_option + Environment.NewLine);
-                            Console.WriteLine(Messages.Do_not_overwrite_option + Environment.NewLine + Environment.NewLine);
+                            Console.WriteLine(Messages.Do_not_overwrite_option + Environment.NewLine);
+                            Console.WriteLine(Messages.Version_option + Environment.NewLine + Environment.NewLine);
 
                             Console.WriteLine(Messages.Here_are_some_examples + Environment.NewLine);
                             Console.WriteLine(Messages.Examples);
 
+                            Environment.Exit(0);
+                            break;
+
+                        case "-v":
+                        case "--version":
+                            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                            var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
+                            Console.WriteLine(@"Super QOI Converter - " + fvi.FileVersion);
                             Environment.Exit(0);
                             break;
 

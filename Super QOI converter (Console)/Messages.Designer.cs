@@ -221,7 +221,7 @@ namespace Super_QOI_converter__Console_ {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Made by: LuisAlfredo92.
+        ///   Busca una cadena traducida similar a made by.
         /// </summary>
         internal static string Made_by {
             get {
@@ -368,6 +368,15 @@ namespace Super_QOI_converter__Console_ {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a under a MIT license.
+        /// </summary>
+        internal static string Under_a_MIT_license {
+            get {
+                return ResourceManager.GetString("Under a MIT license", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Use arrows or numbers to select option and press Enter.
         /// </summary>
         internal static string Use_arrows_or_numbers_and_Enter {
@@ -377,11 +386,30 @@ namespace Super_QOI_converter__Console_ {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a -v, --version
+        ///	Shows the version of the program.
+        /// </summary>
+        internal static string Version_option {
+            get {
+                return ResourceManager.GetString("Version option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Welcome to.
         /// </summary>
         internal static string Welcome_to {
             get {
                 return ResourceManager.GetString("Welcome to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a With help of:.
+        /// </summary>
+        internal static string With_help_of {
+            get {
+                return ResourceManager.GetString("With help of", resourceCulture);
             }
         }
         

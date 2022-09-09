@@ -216,7 +216,7 @@
     <value>Repository official link</value>
   </data>
   <data name="Made by" xml:space="preserve">
-    <value>Made by: LuisAlfredo92</value>
+    <value>made by</value>
   </data>
   <data name="Use arrows or numbers and Enter" xml:space="preserve">
     <value>Use arrows or numbers to select option and press Enter</value>
@@ -249,5 +249,15 @@
   </data>
   <data name="Not image or folder" xml:space="preserve">
     <value>This isn't a folder, image or it's not supported, skipping...</value>
+  </data>
+  <data name="Under a MIT license" xml:space="preserve">
+    <value>under a MIT license</value>
+  </data>
+  <data name="Version option" xml:space="preserve">
+    <value>-v, --version
+	Shows the version of the program</value>
+  </data>
+  <data name="With help of" xml:space="preserve">
+    <value>With help of:</value>
   </data>
 </root>
