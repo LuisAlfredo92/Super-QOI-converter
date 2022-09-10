@@ -5,8 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Super_QOI_converter__GUI_"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Super QOI converter" Height="450" Width="800" Foreground="White">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="1"/>
+            <GradientStop Color="#FF404040" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SelectedFilesContainer"/>
+            <ColumnDefinition x:Name="ControlsContainer"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="FilesListView" BorderBrush="{x:Null}" Foreground="#FFFFF7F8" MinWidth="200" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontWeight="Bold" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Header="State" Width="10"/>
+                    <GridViewColumn Header="File" Width="320"/>
+                    <GridViewColumn Header="Delete"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Column="1" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="OptionsContainer"/>
+                <RowDefinition x:Name="ButtonsContainer"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="OptionsPanel" Grid.Row="0" VerticalAlignment="Center">
+                <CheckBox Content="Copy attributes and dates from original files" Foreground="White" BorderBrush="Black" Cursor="Hand" IsChecked="True" Background="White" />
+                <CheckBox Content="Delete files when conversion finishes" Foreground="White" BorderBrush="Black" Cursor="Hand" Background="White" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Foreground="White" Content="What to do when there's an existing file?" />
+                    <ComboBox Margin="10,0,0,0" MinWidth="80" BorderBrush="{x:Null}" Background="Black" Foreground="Black" >
+                        <ComboBoxItem Content="Ask" IsSelected="True"/>
+                        <ComboBoxItem Content="Rename"/>
+                        <ComboBoxItem Content="Overwrite"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="ButtonsPanel"  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200">
+                <Button AutomationProperties.Name="AddFilesBtn" AutomationProperties.HelpText="Select files to the list to be converted" AutomationProperties.IsRequiredForForm="True" Content="Add files" FontSize="18" FontWeight="Bold" Padding="1,5,1,5" Background="White" BorderBrush="{x:Null}" Cursor="Hand" Click="AddFilesBtn_Click" />
+                <Button FontSize="18" Content="Add folder" FontWeight="Bold" Margin="0,20,0,20" Padding="1,5,1,5" Background="White" BorderBrush="{x:Null}" Cursor="Hand" AutomationProperties.Name="AddFolderBtn" />
+                <Button FontWeight="Bold" FontSize="18" Content="Start conversion" AutomationProperties.HelpText="Starts conversion of the selected files and folders" Padding="1,5,1,5" Background="White" Cursor="Hand" AutomationProperties.IsRequiredForForm="True" AutomationProperties.Name="StartConversionBtn" IsEnabled="False" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
