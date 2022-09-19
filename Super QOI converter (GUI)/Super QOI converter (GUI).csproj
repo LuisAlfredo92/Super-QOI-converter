@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <None Remove="resources\del.png" />
+    <None Remove="resources\Done.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,7 +50,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="resources\del.png" />
+    <Resource Include="resources\Done.svg" />
   </ItemGroup>
 
 </Project>
