@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using Path = System.IO.Path;
 
 namespace Super_QOI_converter__GUI_
 {
@@ -23,37 +24,12 @@ namespace Super_QOI_converter__GUI_
     public partial class MainWindow : Window
     {
 
-        public class FileRow
-        {
-            private Image StateImage { get; set; }
-            private string Path { get; set; }
-            private Button DeleteButton { get; set; } 
-
-
-            public FileRow(string path)
-            {
-                StateImage = new()
-                {
-                    MaxHeight = 10,
-                    MaxWidth = 10,
-                    Height = 8,
-                    Width = 8,
-                };
-                Path = path;
-                DeleteButton = new()
-                {
-                    Width = 10,
-                    Content = "Delete"
-                };
-            }
-        }
-
-        private List<FileRow> files;
+        private List<string> filePathsList;
 
         public MainWindow()
         {
             InitializeComponent();
-            files = new();
+            filePathsList = new();
         }
 
         private void AddFilesBtn_Click(object sender, RoutedEventArgs e)
@@ -65,10 +41,23 @@ namespace Super_QOI_converter__GUI_
                 Filter = "Supported images|*.jpeg;*.png;*.jpg;*.bmp;*.JPEG;*.PNG;*.JPG;*.BMP"
             };
             openFileDialog.ShowDialog();
-            foreach (var file in openFileDialog.FileNames)
-                files.Add(new FileRow(file));
+            foreach (var filePath in openFileDialog.FileNames)
+                filePathsList.Add(filePath);
 
-            FilesListView.ItemsSource = files;
+            UpdateListView();
+        }
+
+        private void ClearListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            filePathsList.Clear();
+            UpdateListView();
+        }
+
+        private void UpdateListView()
+        {
+            FilesListView.ItemsSource = null;
+            FilesListView.UpdateLayout();
+            FilesListView.ItemsSource = filePathsList;
         }
     }
 }

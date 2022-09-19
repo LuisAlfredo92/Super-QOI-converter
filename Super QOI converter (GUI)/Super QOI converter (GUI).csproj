@@ -26,6 +26,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\del.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appiconfg_256.ico" />
   </ItemGroup>
 
@@ -42,6 +46,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\del.png" />
   </ItemGroup>
 
 </Project>

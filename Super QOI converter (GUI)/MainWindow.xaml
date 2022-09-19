@@ -17,15 +17,52 @@
             <ColumnDefinition x:Name="SelectedFilesContainer"/>
             <ColumnDefinition x:Name="ControlsContainer"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="FilesListView" BorderBrush="{x:Null}" Foreground="#FFFFF7F8" MinWidth="200" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontWeight="Bold" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="State" Width="10"/>
-                    <GridViewColumn Header="File" Width="320"/>
-                    <GridViewColumn Header="Delete"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0"
+                      x:Name="FilesListView"
+                      BorderBrush="{x:Null}"
+                      Foreground="#FFFFF7F8"
+                      MinWidth="200"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Stretch"
+                      FontWeight="Bold"
+                      Background="{x:Null}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="State" Width="25">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="/resources/done.png" Width="8" Height="8" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="File" Width="320"/>
+                        <GridViewColumn Header="Remove" Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="/resources/del.png" Cursor="Hand" Width="8" Height="8" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button x:Name="ClearListBtn"
+                    Grid.Row="1"
+                    Content="Clear list"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Background="White"
+                    BorderBrush="{x:Null}"
+                    Cursor="Hand"
+                    AutomationProperties.Name="ClearListBtn"
+                    Click="ClearListBtn_Click"/>
+        </Grid>
         <Grid Grid.Column="1" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="OptionsContainer"/>
@@ -46,7 +83,7 @@
             <StackPanel x:Name="ButtonsPanel"  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200">
                 <Button AutomationProperties.Name="AddFilesBtn" AutomationProperties.HelpText="Select files to the list to be converted" AutomationProperties.IsRequiredForForm="True" Content="Add files" FontSize="18" FontWeight="Bold" Padding="1,5,1,5" Background="White" BorderBrush="{x:Null}" Cursor="Hand" Click="AddFilesBtn_Click" />
                 <Button FontSize="18" Content="Add folder" FontWeight="Bold" Margin="0,20,0,20" Padding="1,5,1,5" Background="White" BorderBrush="{x:Null}" Cursor="Hand" AutomationProperties.Name="AddFolderBtn" />
-                <Button FontWeight="Bold" FontSize="18" Content="Start conversion" AutomationProperties.HelpText="Starts conversion of the selected files and folders" Padding="1,5,1,5" Background="White" Cursor="Hand" AutomationProperties.IsRequiredForForm="True" AutomationProperties.Name="StartConversionBtn" IsEnabled="False" />
+                <Button FontWeight="Bold" FontSize="18" Content="Start conversion" AutomationProperties.HelpText="Starts conversion of the selected files and folders" Padding="1,5,1,5" Background="White" Cursor="Hand" AutomationProperties.IsRequiredForForm="True" AutomationProperties.Name="StartConversionBtn" IsEnabled="False" IsDefault="True" />
             </StackPanel>
         </Grid>
     </Grid>
