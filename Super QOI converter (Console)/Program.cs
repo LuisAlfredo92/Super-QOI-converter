@@ -26,6 +26,7 @@ namespace Super_QOI_converter__Console_
                 case 0: // Will start the program and receive paths and options internally
                     ReceivePaths();
                     break;
+
                 case 1:
                     switch (args[0]) // printing help or error commands
                     {
@@ -82,6 +83,7 @@ namespace Super_QOI_converter__Console_
                         case "-nd":
                             ReceivePaths();
                             break;
+
                         case "-i":
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(Messages.You_must_add_paths + Environment.NewLine);
@@ -124,19 +126,19 @@ namespace Super_QOI_converter__Console_
                         ChangeConsoleColor(ConsoleColor.White);
                         Environment.Exit(0);
                     }
-                    
+
                     // Reading options
-                    if(args.Contains("-c"))
+                    if (args.Contains("-c"))
                         _copyFileInfo = true;
-                    else if(args.Contains("-nc"))
+                    else if (args.Contains("-nc"))
                         _copyFileInfo = false;
 
-                    if(args.Contains("-d"))
+                    if (args.Contains("-d"))
                         _deleteSources = true;
                     else if (args.Contains("-nd"))
                         _deleteSources = false;
 
-                    if(args.Contains("-o"))
+                    if (args.Contains("-o"))
                         _overwrite = true;
                     else if (args.Contains("-no"))
                         _overwrite = false;
@@ -186,6 +188,7 @@ namespace Super_QOI_converter__Console_
                         else
                             selectedOption = 4;
                         break;
+
                     case ConsoleKey.DownArrow:
                         if (selectedOption < 4)
                             selectedOption++;
@@ -214,7 +217,7 @@ namespace Super_QOI_converter__Console_
                 ChangeConsoleColor(ConsoleColor.White);
                 Console.WriteLine(Messages.Use_arrows_or_numbers_and_Enter);
 
-                var options = new[]{Messages.Yes, Messages.Yes_to_all, Messages.No, Messages.No_to_all};
+                var options = new[] { Messages.Yes, Messages.Yes_to_all, Messages.No, Messages.No_to_all };
                 for (byte i = 1; i <= 4; i++)
                 {
                     options[i - 1] = (selectedOption == i ? "> " : "") + $"{i}. " + options[i - 1];
@@ -350,7 +353,7 @@ namespace Super_QOI_converter__Console_
         /// can modify it externally</param>
         /// <returns>If the respective variable has a value, that value is returned.
         /// If the variable is null, it'll ask to the user what they want to do</returns>
-        public bool ConfirmOverwrite(string existingFile)
+        public bool ConfirmOverwrite(ref string existingFile)
         {
             if (_overwrite.HasValue) return _overwrite.Value;
 

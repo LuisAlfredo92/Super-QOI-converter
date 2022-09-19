@@ -15,7 +15,6 @@ public interface IOptionsConfirmation
     /// <returns>The bool that indicates if the user wants to copy info</returns>
     bool ConfirmCopy(string originalFile = "");
 
-
     /// <summary>
     /// Function to be implemented and used to know or confirm if the user
     /// wants to delete original files once converted
@@ -32,8 +31,7 @@ public interface IOptionsConfirmation
     /// <param name="existingFile">Path of the duplicated file
     /// It can't be empty because it has to be shown to the user</param>
     /// <returns>The bool that indicates if the user wants to overwrite it</returns>
-    bool ConfirmOverwrite(string existingFile);
-
+    bool ConfirmOverwrite(ref string existingFile);
 
     /// <summary>
     /// Function to be implemented and used to know or confirm if the user

@@ -16,7 +16,7 @@ namespace Core
         /// It must implement IOptionsConfirmation interface to work properly</param>
         /// <param name="oldPath">path of the original file, the one that will be converted
         /// into qoi format.</param>
-        public static void ConvertToQoi(IOptionsConfirmation father, string oldPath)
+        public static bool ConvertToQoi(IOptionsConfirmation father, string oldPath)
         {
             /* Checks if the path is a directory, if so, will skip it and call the
              * ManageDirectory function since it won't be possible to convert
@@ -24,7 +24,7 @@ namespace Core
             if (File.GetAttributes(oldPath).HasFlag(FileAttributes.Directory))
             {
                 father.ManageDirectory(oldPath);
-                return;
+                return false;
             }
 
             // Starts conversion and creates the new path
@@ -42,7 +42,7 @@ namespace Core
             /* If the file exists, the ConfirmOverwrite will be called to handle it, and
              * if the user doesn't want to overwrite, the file will be skipped
              */
-            if (File.Exists(newPath) && !father.ConfirmOverwrite(newPath)) return;
+            if (File.Exists(newPath) && !father.ConfirmOverwrite(ref newPath)) return false;
 
             File.WriteAllBytesAsync(newPath, qoiData);
 
@@ -62,6 +62,7 @@ namespace Core
             // Deletes original file if the user accepts
             if (father.ConfirmDeletion(oldPath))
                 File.Delete(oldPath);
+            return true;
         }
     }
 }
