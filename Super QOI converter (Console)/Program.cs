@@ -349,7 +349,7 @@ namespace Super_QOI_converter__Console_
         /// overwrite existing files
         /// </summary>
         /// <param name="existingFile">Path to the existing file.
-        /// It can's be null because we must show the already existing file so the user
+        /// It can't be null because we must show the already existing file so the user
         /// can modify it externally</param>
         /// <returns>If the respective variable has a value, that value is returned.
         /// If the variable is null, it'll ask to the user what they want to do</returns>

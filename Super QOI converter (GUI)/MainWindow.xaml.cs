@@ -13,18 +13,42 @@ namespace Super_QOI_converter__GUI_
     /// </summary>
     public partial class MainWindow : Window, IOptionsConfirmation
     {
-        private bool? _isfolderConfirmed;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             FilesListView.LayoutUpdated += UnlockButtons;
         }
 
+        /// <summary>
+        /// Function from IConfirmOptions that will confirm if the user wants to
+        /// copy attributes and dates from the original files
+        /// </summary>
+        /// <param name="originalFile">Path to the original file.
+        /// It can be null since it isn't necessary. In this case we don't use it</param>
+        /// <returns>If the respective checkbox is checked</returns>
         public bool ConfirmCopy(string originalFile = "") => CopyAttributesCheckBox.IsChecked!.Value;
 
+        /// <summary>
+        /// Function from IConfirmOptions that will confirm if the user wants to
+        /// delete the original files
+        /// </summary>
+        /// <param name="originalFile">Path to the original file.
+        /// It can be null since it isn't necessary. In this case we don't use it</param>
+        /// <returns>If the respective checkbox is checked</returns>
         public bool ConfirmDeletion(string originalFile = "") => DeleteOriginalFilesCheckBox.IsChecked!.Value;
 
+        /// <summary>
+        /// Function from IConfirmOptions that will confirm or ask if the user wants to
+        /// overwrite existing files
+        /// </summary>
+        /// <param name="existingFile">Path to the existing file.
+        /// It can't be null because we must show the already existing file so the user
+        /// can modify it externally or see the file we're talking about</param>
+        /// <returns>Depending on the option marked on the combobox, it will indicate
+        /// to Core if it can continue or not, and modify the new name of the file</returns>
         public bool ConfirmOverwrite(ref string existingFile)
         {
             switch (OverwriteComboBox.SelectedIndex)
@@ -53,8 +77,15 @@ namespace Super_QOI_converter__GUI_
             }
         }
 
+        /// <summary>
+        /// Manages if the Core finds a directory. Not used
+        /// </summary>
+        /// <param name="directoryPath">The directory path.</param>
         public void ManageDirectory(string directoryPath) => FilesListView.Items.Add(Directory.GetFiles(directoryPath));
 
+        /// <summary>
+        /// Function called when the user press the Add files button
+        /// </summary>
         private void AddFilesBtn_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog()
@@ -69,17 +100,21 @@ namespace Super_QOI_converter__GUI_
                 FilesListView.Items.Add(filePath);
         }
 
-        private void ClearListBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FilesListView.Items.Clear();
-        }
+        /// <summary>
+        /// Function called when the user press the Clear list button
+        /// </summary>
+        private void ClearListBtn_Click(object sender, RoutedEventArgs e) => FilesListView.Items.Clear();
 
+        /// <summary>
+        /// Function called to remove only one element from the ListView
+        /// </summary>
         private void DelItemBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            var pathToDelete = ((sender as Button)!).CommandParameter;
-            FilesListView.Items.Remove(pathToDelete);
-        }
+            => FilesListView.Items.Remove(((sender as Button)!).CommandParameter);
 
+        /// <summary>
+        /// Event that occurs when the ListView is updated to enable or disable
+        /// the Clear list and Start conversion buttons
+        /// </summary>
         private void UnlockButtons(object? sender, EventArgs e)
         {
             if (FilesListView.Items.Count > 0)
@@ -88,6 +123,9 @@ namespace Super_QOI_converter__GUI_
                 ClearListBtn.IsEnabled = StartConversionBtn.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Starts the conversion of the files from The ListView
+        /// </summary>
         private void StartConversionBtn_OnClick(object sender, RoutedEventArgs e)
         {
             for (var i = 0; i < FilesListView.Items.Count;)
