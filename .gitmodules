@@ -1,0 +1,6 @@
+[submodule "Super QOI converter (Console)"]
+	path = Super QOI converter (Console)
+	url = https://github.com/LuisAlfredo92/Super-QOI-converter-Console-
+[submodule "Super QOI converter (GUI)"]
+	path = Super QOI converter (GUI)
+	url = https://github.com/LuisAlfredo92/Super-QOI-converter-GUI-
