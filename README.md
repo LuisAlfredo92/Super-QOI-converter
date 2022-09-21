@@ -8,3 +8,8 @@ This project has 3 subprojects:
 - **[Console version](https://github.com/LuisAlfredo92/Super-QOI-converter-Console- "Console version"):** Available for Linux, OSX and Windows
 - **[GUI version](https://github.com/LuisAlfredo92/Super-QOI-converter-GUI- "GUI version"):** Available only for windows
 - **Core:** Part of the program that will make the conversion. If you'd like to do your own converter you can use that Core to make the conversion easier
+
+## Releases
+If you want to try any of the programs, here are the latest releases:
+- [Console version](https://github.com/LuisAlfredo92/Super-QOI-converter-Console-/releases/latest "Console version") (Linux / OSX / Windows)
+- [GUI version](https://github.com/LuisAlfredo92/Super-QOI-converter-GUI-/releases/latest "GUI version") (Windows)
