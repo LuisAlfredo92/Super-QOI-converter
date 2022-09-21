@@ -1,4 +1,4 @@
-# Super QOI converter (GUI)
+# Super QOI converter
 ##### *An useful program to convert any image into QOI format*
 [![Super QOI converter icon](https://github.com/LuisAlfredo92/Super-QOI-converter/blob/master/Core/Resources/appiconfg_256.png "Super QOI converter icon")](https://github.com/LuisAlfredo92/Super-QOI-converter/blob/master/Core/Resources/appiconfg_256.png "Super QOI converter icon")
 
