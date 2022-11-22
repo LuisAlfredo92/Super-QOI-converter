@@ -34,7 +34,7 @@ namespace Core
 
             using (var stream = File.OpenRead(oldPath))
             {
-                var image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
+                var image = ImageResult.FromStream(stream);
                 var qoiImage = new QoiImage(image.Data, image.Width, image.Height, (Channels)image.Comp);
                 qoiData = QoiEncoder.Encode(qoiImage);
             }
